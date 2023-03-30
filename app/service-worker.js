@@ -1,4 +1,4 @@
-async function sendHost(url) {
+async function sendHost(url, tabId) {
   //ローカルアプリの起動
   const port = chrome.runtime.connectNative('tweet_youtube_video')
 
@@ -24,8 +24,7 @@ async function sendHost(url) {
       console.log(req)
     }
 
-    let currentTab = await getCurrentTab();
-    chrome.tabs.sendMessage(currentTab.id, {message: `from background`});
+    chrome.tabs.sendMessage(tabId, {message: `from background`});
     console.log('sent back');
   }
 
@@ -40,10 +39,8 @@ async function getCurrentTab() {
 }
 
 chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
-  console.log(request);
-  let currentTab = await getCurrentTab();
-  console.log(currentTab);
-  await sendHost(currentTab.url);
+  console.log(sender)
+  await sendHost(sender.tab.url, sender.tab.id);
   console.log('downloaded');
 })
 

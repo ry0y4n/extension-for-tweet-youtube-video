@@ -53,9 +53,11 @@ process.stdin.on('readable', () => {
 
       const mediaIds = await client.v1.uploadMedia(`${__dirname}/video/video-clip.mp4`);
       await client.v1.tweet('api test', { media_ids: mediaIds });
-
-      // await deleteVideo();
-      sendMessage({message: 'pong', body: 'hello from nodejs app',ping_body:req.body});
+      
+      fs.unlink(`${__dirname}/video/video-clip.mp4`, ((err) => {
+        if (err) throw err;
+        sendMessage({message: 'pong', body: 'hello from nodejs app',ping_body:req.body});
+      }));
     }
   }
   
