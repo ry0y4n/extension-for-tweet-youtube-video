@@ -3,7 +3,6 @@ let buttonWrapper;
 let jsInitCheckTimer = setInterval(jsLoaded, 1000);
 function jsLoaded() {
     if ((buttonWrapper = document.getElementById("top-level-buttons-computed")) != null) {
-        console.log(buttonWrapper)
         clearInterval(jsInitCheckTimer);
 
         addExtensionHTML();
@@ -76,7 +75,6 @@ function addExtensionHTML() {
     extensionDiv.appendChild(endTimeInput);
 
     tweetClipButton.addEventListener("click", () => {
-        console.log("clicked")
         chrome.runtime.sendMessage({message: "from content(injected)"});
     });
 }

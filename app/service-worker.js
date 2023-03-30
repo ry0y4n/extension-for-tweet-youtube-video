@@ -19,17 +19,17 @@ async function sendHost(url, tabId) {
   })
 
   async function handleMessage (req) {
-    console.log("req.message : " + req.message);
     if (req.message === 'pong') {
       console.log(req)
     }
 
+    console.log("Tweet Finished");
     chrome.tabs.sendMessage(tabId, {message: `from background`});
-    console.log('sent back');
   }
 
   //ローカルアプリへメッセージ送信
   port.postMessage({message: 'ping', body: 'hello from browser extension', url: url});
+  console.log("Tweet Start");
 }
 
 async function getCurrentTab() {
@@ -39,14 +39,11 @@ async function getCurrentTab() {
 }
 
 chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
-  console.log(sender)
   await sendHost(sender.tab.url, sender.tab.id);
-  console.log('downloaded');
 })
 
 chrome.tabs.onUpdated.addListener(async (tabId, info, tab) => {
   if (info.title != undefined && info.title != "YouTube") {
-    console.log('インジェクションします！')
     console.log(info)
     chrome.scripting.executeScript({
       target: {
