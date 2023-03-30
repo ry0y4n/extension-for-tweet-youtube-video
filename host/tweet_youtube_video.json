@@ -1,0 +1,10 @@
+{
+    "name": "tweet_youtube_video",
+    "description": "Tweeting YouTube Clip App",
+    "path": "/Users/momosuke/extension-for-downloading-youtube-clip/host/index.js",
+    "type": "stdio",
+    "supports_native_initiated_connections": true,
+    "allowed_origins": [
+        "chrome-extension://npnpoipenggacmgadbpbppjijnklljaa/"
+    ]
+}
