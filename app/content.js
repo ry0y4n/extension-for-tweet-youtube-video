@@ -7,11 +7,6 @@ function jsLoaded() {
         clearInterval(jsInitCheckTimer);
 
         addExtensionHTML();
-
-        tweetClipButton.addEventListener("click", () => {
-            console.log("clicked")
-            chrome.runtime.sendMessage({message: "from content(injected)"});
-        });
     }
 }
 
@@ -70,6 +65,7 @@ function addExtensionHTML() {
     );
 
     let extensionDiv = document.createElement("div");
+    extensionDiv.setAttribute("id", "extensionArea");
     extensionDiv.classList.add("yt-spec-button-shape-next", "yt-spec-button-shape-next--tonal", "yt-spec-button-shape-next--mono", "yt-spec-button-shape-next--size-m", "yt-spec-button-shape-next--icon-leading");
     extensionDiv.style.marginRight = "8px";
     extensionDiv.style.paddingLeft = "0px";

@@ -1,7 +1,17 @@
 #!/usr/bin/env /usr/local/bin/node
 
 const youtubedl = require('youtube-dl-exec');
+const { TwitterApi } = require('twitter-api-v2');
 const fs = require('fs');
+
+const secrets = JSON.parse(fs.readFileSync('secrets.json'));
+
+const client = new TwitterApi({
+    appKey: secrets["appKey"],
+    appSecret: secrets["appSecret"],
+    accessToken: secrets["accessToken"],
+    accessSecret: secrets["accessSecret"]
+});
 
 async function getVideo(url, flags) {
   return youtubedl(url, {...flags});
@@ -40,6 +50,10 @@ process.stdin.on('readable', () => {
         // downloadSections: `*${startTime}-${parseInt(startTime)+parseInt(duration)}`,
         o: `${__dirname}/video/video-clip.%(ext)s`
       });
+
+      const mediaIds = await client.v1.uploadMedia(`${__dirname}/video/video-clip.mp4`);
+      await client.v1.tweet('api test', { media_ids: mediaIds });
+
       // await deleteVideo();
       sendMessage({message: 'pong', body: 'hello from nodejs app',ping_body:req.body});
     }

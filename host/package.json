@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "twitter-api-v2": "^1.14.2",
     "youtube-dl-exec": "^2.4.0"
   }
 }

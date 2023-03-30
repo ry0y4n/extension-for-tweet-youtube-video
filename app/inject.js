@@ -1,3 +1,5 @@
-if (buttonWrapper != undefined) {
-    addExtensionHTML();
-}
+setTimeout(() => {
+    if (document.getElementById("extensionArea") == null) {
+        addExtensionHTML();
+    }
+}, 1000)
