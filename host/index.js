@@ -1,5 +1,19 @@
 #!/usr/bin/env /usr/local/bin/node
 
+const youtubedl = require('youtube-dl-exec');
+const fs = require('fs');
+
+async function getVideo(url, flags) {
+  return youtubedl(url, {...flags});
+};
+
+async function deleteVideo() {
+  return fs.unlink(`${__dirname}/video/video-clip.mp4`, ((err) => {
+    if (err) throw err;
+      console.log('completed cleaning');
+  }));
+}
+
 //標準入力処理
 process.stdin.on('readable', () => {
     var input = []
@@ -19,9 +33,15 @@ process.stdin.on('readable', () => {
     }
   })
   
-  function handleMessage (req) {
+  async function handleMessage (req) {
     if (req.message === 'ping') {
-      sendMessage({message: 'pong', body: 'hello from nodejs app',ping_body:req.body})
+      await getVideo(req.url, {
+        f: "22/18",
+        // downloadSections: `*${startTime}-${parseInt(startTime)+parseInt(duration)}`,
+        o: `${__dirname}/video/video-clip.%(ext)s`
+      });
+      // await deleteVideo();
+      sendMessage({message: 'pong', body: 'hello from nodejs app',ping_body:req.body});
     }
   }
   
