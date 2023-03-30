@@ -3,7 +3,10 @@
     "name": "My YouTube Content Script Extension",
     "version": "1.0.0",
     "description": "This extension injects a content script into YouTube video pages.",
-    "permissions": ["nativeMessaging"],
+    "permissions": [
+      "nativeMessaging",
+      "activeTab"
+    ],
     "content_scripts": [
       {
         "matches": ["https://www.youtube.com/watch*"],

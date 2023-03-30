@@ -14,6 +14,13 @@ window.addEventListener("load", () => {
             tweetClipButton.classList.add("yt-spec-button-shape-next", "yt-spec-button-shape-next--tonal", "yt-spec-button-shape-next--mono", "yt-spec-button-shape-next--size-m", "yt-spec-button-shape-next--icon-leading")
             tweetClipButton.style.marginRight = "8px"
             buttonWrapper.insertBefore(tweetClipButton, buttonWrapper.firstChild);
+            buttonWrapper.addEventListener("click", () => {
+                chrome.runtime.sendMessage({message: "from content"});
+            })
         }
     }
+
+    chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+        console.log(request);
+    });
 })
