@@ -5,7 +5,10 @@
     "description": "This extension injects a content script into YouTube video pages.",
     "permissions": [
       "nativeMessaging",
-      "activeTab"
+      "scripting"
+    ],
+    "host_permissions": [
+      "https://www.youtube.com/watch*"
     ],
     "content_scripts": [
       {

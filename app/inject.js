@@ -1,0 +1,3 @@
+if (buttonWrapper != undefined) {
+    addExtensionHTML();
+}
