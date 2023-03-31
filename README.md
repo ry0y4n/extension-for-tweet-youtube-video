@@ -10,6 +10,15 @@ YouTube動画をアップロードする形でツイートするためのChrome�
 
 ## インストール方法
 
+0. TwitterのAPIキーとアクセストークンを取得して，`host/secrets.json`へ貼り付ける
+    ```
+    {
+        "appKey": "",
+        "appSecret": "",
+        "accessToken": "",
+        "accessSecret": ""
+    }
+    ```
 1. `chrome://extensions`を開く
 2. `デベロッパーモード`を有効にする
 3. `パッケージ化されていない拡張機能を読み込む`をクリック
@@ -32,7 +41,7 @@ YouTube動画をアップロードする形でツイートするためのChrome�
 
 ## デモ
 
-[WIP]
+![](./tweet-youtube-video-demo.gif)
 
 ## 参考記事
 
