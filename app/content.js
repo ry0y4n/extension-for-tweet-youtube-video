@@ -1,4 +1,7 @@
+let isLoad = false;
 let buttonWrapper;
+
+console.log()
 
 window.addEventListener("popstate", () => {
     waitDynamicLoad();    
@@ -9,6 +12,7 @@ function waitDynamicLoad() {
     function jsLoaded() {
         if ((buttonWrapper = document.getElementById("top-level-buttons-computed")) != null) {
             clearInterval(timerId);
+            isLoad = true;
     
             if (document.getElementById("extensionArea") == null) {
                 addExtensionHTML();
@@ -17,8 +21,6 @@ function waitDynamicLoad() {
     }
     timerId = setInterval(jsLoaded, 1000);
 }
-
-waitDynamicLoad();
 
 function addExtensionHTML() {
     let tweetClipButton = document.createElement("div");
@@ -36,3 +38,5 @@ function addExtensionHTML() {
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     console.log(request);
 });
+
+window.addEventListener("load", waitDynamicLoad, false);
