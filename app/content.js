@@ -2,18 +2,26 @@ let buttonWrapper;
 
 window.addEventListener("popstate", () => {
     console.log("pop state is changed");
-    setTimeout(addExtensionHTML, 1000);
+    waitDynamicLoad();
     
 })
 
-let jsInitCheckTimer = setInterval(jsLoaded, 1000);
-function jsLoaded() {
-    if ((buttonWrapper = document.getElementById("top-level-buttons-computed")) != null) {
-        clearInterval(jsInitCheckTimer);
-
-        addExtensionHTML();
+function waitDynamicLoad() {
+    let timerId;
+    function jsLoaded() {
+        console.log("hoge", timerId);
+        if ((buttonWrapper = document.getElementById("top-level-buttons-computed")) != null) {
+            clearInterval(timerId);
+    
+            if (document.getElementById("extensionArea") == null) {
+                addExtensionHTML();
+            }
+        }
     }
+    timerId = setInterval(jsLoaded, 1000);
 }
+
+waitDynamicLoad();
 
 function addExtensionHTML() {
     let tweetClipButton = document.createElement("div");
