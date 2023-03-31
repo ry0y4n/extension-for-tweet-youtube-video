@@ -19,16 +19,13 @@ async function sendHost(url, tabId, title) {
   })
 
   async function handleMessage (req) {
-    if (req.message === 'pong') {
-      console.log(req)
-    }
-
     console.log("Tweet Finished");
-    chrome.tabs.sendMessage(tabId, {message: `from background`});
+    chrome.tabs.sendMessage(tabId, {message: `Tweet Finished`});
   }
 
   //ローカルアプリへメッセージ送信
   port.postMessage({message: 'ping', body: 'hello from browser extension', url: url, title: title});
+  chrome.tabs.sendMessage(tabId, {message: `Tweet Start`});
   console.log("Tweet Start");
 }
 
