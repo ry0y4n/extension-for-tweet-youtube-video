@@ -1,15 +1,12 @@
 let buttonWrapper;
 
 window.addEventListener("popstate", () => {
-    console.log("pop state is changed");
-    waitDynamicLoad();
-    
+    waitDynamicLoad();    
 })
 
 function waitDynamicLoad() {
     let timerId;
     function jsLoaded() {
-        console.log("hoge", timerId);
         if ((buttonWrapper = document.getElementById("top-level-buttons-computed")) != null) {
             clearInterval(timerId);
     
