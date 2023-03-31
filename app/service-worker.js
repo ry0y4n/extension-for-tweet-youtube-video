@@ -1,4 +1,4 @@
-async function sendHost(url, tabId) {
+async function sendHost(url, tabId, title) {
   //ローカルアプリの起動
   const port = chrome.runtime.connectNative('tweet_youtube_video')
 
@@ -28,7 +28,7 @@ async function sendHost(url, tabId) {
   }
 
   //ローカルアプリへメッセージ送信
-  port.postMessage({message: 'ping', body: 'hello from browser extension', url: url});
+  port.postMessage({message: 'ping', body: 'hello from browser extension', url: url, title: title});
   console.log("Tweet Start");
 }
 
@@ -39,7 +39,7 @@ async function getCurrentTab() {
 }
 
 chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
-  await sendHost(sender.tab.url, sender.tab.id);
+  await sendHost(sender.tab.url, sender.tab.id, sender.tab.title);
 })
 
 chrome.tabs.onUpdated.addListener(async (tabId, info, tab) => {

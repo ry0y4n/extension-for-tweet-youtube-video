@@ -3,6 +3,7 @@
 const youtubedl = require('youtube-dl-exec');
 const { TwitterApi } = require('twitter-api-v2');
 const fs = require('fs');
+const { execSync } = require('child_process')
 
 const secrets = JSON.parse(fs.readFileSync('secrets.json'));
 
@@ -17,11 +18,15 @@ async function getVideo(url, flags) {
   return youtubedl(url, {...flags});
 };
 
-async function deleteVideo() {
-  return fs.unlink(`${__dirname}/video/video-clip.mp4`, ((err) => {
-    if (err) throw err;
-      console.log('completed cleaning');
-  }));
+function convertYouTubeUrl(url) {
+  const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?(.+)/;
+  const match = url.match(regex);
+  if (match) {
+    const videoId = match[1];
+    return `youtu.be/${videoId}`;
+  } else {
+    throw new Error('Invalid YouTube URL');
+  }
 }
 
 //標準入力処理
@@ -47,12 +52,14 @@ process.stdin.on('readable', () => {
     if (req.message === 'ping') {
       await getVideo(req.url, {
         f: "22/18",
-        // downloadSections: `*${startTime}-${parseInt(startTime)+parseInt(duration)}`,
         o: `${__dirname}/video/video-clip.%(ext)s`
       });
 
+      let convertedUrl = convertYouTubeUrl(req.url);
+      let title = req.title.replace(/ - YouTube$/, "");
       const mediaIds = await client.v1.uploadMedia(`${__dirname}/video/video-clip.mp4`);
-      await client.v1.tweet('api test', { media_ids: mediaIds });
+      await client.v1.tweet(`${title} ${convertedUrl} @YouTubeより`, { media_ids: mediaIds });
+
       
       fs.unlink(`${__dirname}/video/video-clip.mp4`, ((err) => {
         if (err) throw err;
