@@ -1,3 +1,5 @@
-if (isLoad) {
-    waitDynamicLoad();
-}
+if (isLoad != undefined) {
+    if (isLoad == true) {
+        waitDynamicLoad();
+    }
+} 
