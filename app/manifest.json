@@ -1,8 +1,8 @@
 {
     "manifest_version": 3,
-    "name": "My YouTube Content Script Extension",
+    "name": "Tweet with YouTube video",
     "version": "1.0.0",
-    "description": "This extension injects a content script into YouTube video pages.",
+    "description": "This extension is for tweeting YouTube videos.",
     "permissions": [
       "nativeMessaging",
       "scripting"
