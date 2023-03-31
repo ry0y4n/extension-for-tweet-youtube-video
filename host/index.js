@@ -3,7 +3,6 @@
 const youtubedl = require('youtube-dl-exec');
 const { TwitterApi } = require('twitter-api-v2');
 const fs = require('fs');
-const { execSync } = require('child_process')
 
 const secrets = JSON.parse(fs.readFileSync('secrets.json'));
 
