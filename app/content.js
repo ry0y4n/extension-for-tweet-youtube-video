@@ -1,5 +1,11 @@
 let buttonWrapper;
 
+window.addEventListener("popstate", () => {
+    console.log("pop state is changed");
+    setTimeout(addExtensionHTML, 1000);
+    
+})
+
 let jsInitCheckTimer = setInterval(jsLoaded, 1000);
 function jsLoaded() {
     if ((buttonWrapper = document.getElementById("top-level-buttons-computed")) != null) {
