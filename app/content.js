@@ -1,13 +1,12 @@
 let isLoad = false;
 let buttonWrapper;
 
-console.log()
-
 window.addEventListener("popstate", () => {
     waitDynamicLoad();    
 })
 
 function waitDynamicLoad() {
+    if (location.href.indexOf("https://www.youtube.com/watch?") == -1) return;
     let timerId;
     function jsLoaded() {
         if ((buttonWrapper = document.getElementById("top-level-buttons-computed")) != null) {

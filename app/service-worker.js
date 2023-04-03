@@ -40,6 +40,7 @@ chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
 })
 
 chrome.tabs.onUpdated.addListener(async (tabId, info, tab) => {
+  if (tab?.url?.indexOf("https://www.youtube.com/watch?") == -1) return;
   if (info.title != undefined && info.title != "YouTube") {
     console.log(info)
     chrome.scripting.executeScript({
