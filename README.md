@@ -29,7 +29,7 @@ YouTube動画をアップロードする形でツイートするためのChrome�
     2. `"allowed_origins"`に拡張機能のIDを貼り付ける
 7. `host/tweet_youtube_video.json`を`~/Library/Application\ Support/Google/Chrome/NativeMessagingHosts`にコピーする
 8. `node`と`host/index.js`が実行可能なことを確認する
-    > \[重要\] MacOSにて，ターミナルで実行可能にも関わらず，Native Messagingのホストプログラムとしてうまく動作しないことがある．これはChromeの軌道方法によって引き継ぐパスが異なることが原因である．zsh等のターミナルではnodeへのパスが通っていても，Launchpadによって起動されたChromeからはnodeが見つけられないからである．少し昔のhomebrewで入れたnodeであれば`/usr/local/bin/node`にあるので問題ないのだが，nodenvやasdfなどのバージョン管理ツールを使ってnodeをインストールしている場合，この問題に直面する．解決法としては，`/usr/local/bin/node`にシンボリックリンクを貼ることで問題は解消される．（例↓）
+    > \[重要\] MacOSにて，ターミナルで実行可能にも関わらず，Native Messagingのホストプログラムとしてうまく動作しないことがあります．これはChromeの起動方法によって引き継ぐパスが異なることが原因です．zsh等のターミナルではnodeへのパスが通っていても，Launchpadによって起動されたChromeからはnodeが見つけられないからです．少し昔のhomebrewで入れたnodeであれば`/usr/local/bin/node`にあるので問題ないのですが，nodenvやasdfなどのバージョン管理ツールを使ってnodeをインストールしている場合，この問題に直面します．解決法としては，`/usr/local/bin/node`にシンボリックリンクを貼ることで問題は解消されます．（例↓）
 
     ```
     ln -s /Users/momosuke/.asdf/shims/node /usr/local/bin/node
