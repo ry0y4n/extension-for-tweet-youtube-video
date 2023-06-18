@@ -37,19 +37,15 @@ input_sample = {
 
 async function handleMessage (req) {
   if (req.message === 'ping') {
-    console.log('downloading...')
     await getVideo(req.url, {
       f: "22/18",
       o: `${__dirname}/video/video-clip.%(ext)s`
     });
 
-    console.log('downloaded')
     let convertedUrl = convertYouTubeUrl(req.url);
     let title = req.title.replace(/ - YouTube$/, "");
-    console.log(__dirname)
     const mediaIds = await client.v1.uploadMedia(`${__dirname}/video/video-clip.mp4`);
-    console.log(mediaIds.toString())
-    console.log(`${title} ${convertedUrl} @YouTubeより`)
+
     await client.v2.tweet({
         text: `${title} ${convertedUrl} @YouTubeより`,
         media: { media_ids: [mediaIds] }
