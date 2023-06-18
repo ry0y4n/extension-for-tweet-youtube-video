@@ -57,7 +57,10 @@ process.stdin.on('readable', () => {
       let convertedUrl = convertYouTubeUrl(req.url);
       let title = req.title.replace(/ - YouTube$/, "");
       const mediaIds = await client.v1.uploadMedia(`${__dirname}/video/video-clip.mp4`);
-      await client.v1.tweet(`${title} ${convertedUrl} @YouTubeより`, { media_ids: mediaIds });
+      await client.v2.tweet({
+        text: `${title} ${convertedUrl} @YouTubeより`,
+        media: { media_ids: [mediaIds] }
+      });
       
       fs.unlink(`${__dirname}/video/video-clip.mp4`, ((err) => {
         if (err) throw err;
