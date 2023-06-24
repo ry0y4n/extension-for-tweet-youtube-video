@@ -31,11 +31,15 @@ function addExtensionHTML() {
 
     tweetClipButton.addEventListener("click", () => {
         chrome.runtime.sendMessage({message: "from content(injected)"});
+        tweetClipButton.innerHTML = "Tweeting...";
     });
 }
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     console.log(request);
+    if (request.message == "Tweet Finished") {
+        document.getElementById("extensionArea").innerHTML = "Tweeted!";
+    }
 });
 
 window.addEventListener("load", waitDynamicLoad, false);

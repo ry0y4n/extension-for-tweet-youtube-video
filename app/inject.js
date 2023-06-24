@@ -15,6 +15,7 @@ if (typeof(waitDynamicLoad) === 'undefined') {
         buttonWrapper.insertBefore(tweetClipButton, buttonWrapper.firstChild);
         tweetClipButton.addEventListener("click", () => {
             chrome.runtime.sendMessage({message: "from content(injected)"});
+            tweetClipButton.innerHTML = "Tweeting...";
         });
     }
 
